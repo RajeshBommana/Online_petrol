@@ -1,0 +1,32 @@
+CREATE DATABASE online_petrol_service;
+USE online_petrol_service;
+
+-- Create tables
+CREATE TABLE admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    hyderabad_places VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE orders (
+    order_number INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    nearby_landmark VARCHAR(255) NOT NULL,
+    admin_place VARCHAR(100) NOT NULL,
+    provider VARCHAR(100) NOT NULL,
+    spd VARCHAR(10) NOT NULL,
+    liters INT NOT NULL,
+    total_price DECIMAL(10, 2) NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
