@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>User Online Petrol</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            font-weight: bolder;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-container nav {
+            display: flex;
+            align-items: center;
+        }
+        .nav-container nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-container nav ul li {
+            margin-left: 20px;
+        }
+        .nav-container a {
+            color: orangered;
+            font-size: larger;
+            text-decoration: none;
+        }
+        .nav-container nav ul li.services a {
+            text-decoration: underline;
+        }
+        .logo-container {
+            flex: 1;
+            padding-left: 0;
+        }
+        .logo-container img {
+            height: 100px;
+            width: auto;
+            padding: 0;
+            margin: 0;
+        }
+        .links-container {
+            flex: 2;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 5%;
+        }
+        .form-container {
+            margin-top: 90px; /* Adjust for fixed navbar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100% - 120px);
+        }
+        .form-container form {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .form-container label {
+            display: block;
+            margin-top: 10px;
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid orangered;
+            border-radius: 5px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            background-color: orangered;
+            color: white;
+            font-size: larger;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <div class="logo-container">
+            <a href="static/mainlogo.gif"><img src="static/mainlogo.gif" alt="Main Logo"></a>
+        </div>
+        <div class="links-container">
+            <nav>
+                <ul>
+                    <li><a href="http://127.0.0.1:5000/home">Home</a></li>
+                    <li class="services"><a href="http://127.0.0.1:5000/services">Services</a></li>
+                    <li><a href="http://127.0.0.1:5000/contact_support">Contact Support</a></li>
+                    <div style="color: orangered;font-size: larger;text-decoration: none;margin: right 25px;">
+                    {% if session.logged_in %}
+                        <li>Welcome, {{ session.username }}!</li>
+                        <li><a href="/logout">Logout</a></li>
+                    {% else %}
+                    </div>
+                        <li><a href="http://127.0.0.1:5000/login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+<br><br><br>
+<br><br><br>
+<div>
+    <h1 style="color: orangered; text-align: center;">Book Your Fuel/Deisel</h1>
+    </div>
+    <div class="form-container">
+        <form action="/services" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        
+            <label for="phone_number">Phone Number:</label>
+            <input type="tel" id="phone_number" name="phone_number" required>
+        
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+        
+            <label for="nearby_landmark">Nearby Landmark:</label>
+            <input type="text" id="nearby_landmark" name="nearby_landmark" required>
+        
+            <label for="admin_place">Admin Place:</label>
+            <select id="admin_place" name="admin_place" required>
+                <option value="">Select Admin Place</option>
+                {% for place in hyderabad_places %}
+                    <option value="{{ place }}">{{ place }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="provider">Provider:</label>
+<select id="provider" name="provider" required>
+    <option value="">Select Provider</option>
+        <option value="Hindustan petroleum">Hindustan petroleum</option>
+        <option value="Indian petroleum">Indian petroleum</option>
+        <option value="Nayara">Nayara</option>
+        <option value="Bharat petroleum">Bharat petroleum</option>
+        <!-- Add more options as needed -->
+</select>
+
+<label for="spd">Select petrol/diesel:</label>
+<select id="spd" name="spd" required>
+    <option value="">Select petrol/diesel</option>
+    <option value="Petrol">Petrol</option>
+    <option value="Diesel">Diesel</option>
+</select>
+
+
+
+
+<form action="/services" method="POST">
+    <label for="liters">Select Amount of petrol/diesel:</label>
+    <select id="liters" name="liters" required>
+        <option value="1">1 Liter</option>
+        <option value="2">2 Liter</option>
+        <option value="3">3 Liter</option>
+        <option value="4">4 Liter</option>
+        <option value="5">5 Liter</option>
+        <!-- Add more options as needed -->
+    </select>
+
+        
+            <button type="order">Order</button>
+            <div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div style="color: orangered; background-color: #ccc;" class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+                </div>
+        </form>
+           
+
+
+    </div>
+</body>
+</html>

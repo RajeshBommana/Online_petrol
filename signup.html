@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup page</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+            background-image: url("static/logo.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            color: white;
+        }
+
+        .header_logo {
+            width: 270px;
+            height: 170px;
+            z-index: 2;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            padding-left: 0px;
+        }
+
+        .welcome_logo {
+            animation: fadeIn 2s ease-in-out forwards;
+            width: 350px;
+            height: 250px;
+            z-index: 2;
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .header ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            z-index: 2;
+        }
+
+        .header ul li {
+            margin-bottom: 10px;
+        }
+
+        .header ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .login_body {
+            font-family: Arial, sans-serif;
+            font-size: large;
+            background-color: transparent;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            padding: 0 10%;
+            padding-top: 5%;
+        }
+
+        .login-container {
+            background-color: transparent;
+            font-weight: bolder;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(239, 91, 4, 0.1);
+            color: rgb(254, 254, 254);
+            font-size: larger;
+            font-weight: bolder;
+            width: 300px;
+            text-align: left;
+            z-index: 2;
+        }
+
+        h2 {
+            color: rgb(2, 254, 250);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border-radius: 25px;
+        }
+
+        button {
+            background-color: skyblue;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: orangered;
+        }
+
+        p {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        p a {
+            color: rgb(2, 254, 250);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="static/logo1.png"><img class="header_logo" src="static/logo1.png" alt="Header Logo"></a>
+        
+        <nav>
+            <ul>
+                <a href="static/welcome.gif"><img class="welcome_logo" src="static/welcome.gif" alt="Welcome Logo"></a>
+            </ul>
+        </nav>
+        <div style="width: 100%; display: flex; justify-content: flex-end; padding: 10px;">
+            <a href="http://127.0.0.1:5000/home" style="color: orangered; font-size: larger;padding-right: 3%; margin-top: 2%;">Home</a>
+        </div>
+    </div>
+    <div>
+        {% if error %}
+        <p style="color: red; font-weight: bolder;font-size: larger;">{{ error }}</p>
+    {% endif %}
+    </div>
+    <div class="login_body">
+        <div class="login-container">
+            <h2>Admin Signup</h2>
+            <form action="/signup" method="post">
+                <input type="hidden" name="user_type" value="admin">
+                <label for="admin_username">Username:</label>
+                <input style="color: orangered; background-color: transparent; font-weight: bolder; font-size: medium; border-color: orangered;" type="text" id="admin_username" name="username" placeholder="Enter your username" autocomplete="username" required>
+    
+                <label for="admin_password">Password:</label>
+                <input style="color: orangered; background-color: transparent; font-weight: bolder; font-size: medium; border-color: orangered;" type="password" id="admin_password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+     
+                <label for="admin_confirmpassword">Confirm Password:</label>
+                <input style="color: orangered; background-color: transparent; font-weight: bolder; font-size: medium; border-color: orangered;" type="password" id="admin_confirmpassword" name="confirmpassword" placeholder="Re-enter your password" autocomplete="current-password" required>
+                
+                <label for="hyderabad_places">Select Place in Hyderabad:</label>
+<select style="color: orangered; background-color: transparent; font-weight: bolder; font-size: medium; border-color: orangered; margin: 5px;" id="hyderabad_places" name="hyderabad_places" required>
+    <option value="Banjara Hills">Banjara Hills</option>
+    <option value="Jubilee Hills">Jubilee Hills</option>
+    <option value="Gachibowli">Gachibowli</option>
+    <option value="Hitech City">Hitech City</option>
+    <option value="Secunderabad">Secunderabad</option>
+    <option value="Uppal">Uppal</option>
+    <option value="Ghatkesar">Ghatkesar</option>
+    <!-- Add more options as needed -->
+</select>
+<br>
+
+
+
+
+
+
+
+                <button type="submit">Sign Up</button>
+
+                <p>Already have an account? Please <a href="/login" style="color: orangered;">Login</a>.</p>
+            </form>
+        </div>
+
+        <div class="login-container">
+            <h2>User Signup</h2>
+            <form action="/signup" method="post">
+                <input type="hidden" name="user_type" value="user">
+                <label for="username">Username:</label>
+                <input style="color: orangered; background-color: transparent; font-weight: bolder; font-size: medium; border-color: orangered;" type="text" id="username" name="username" placeholder="Enter your username" autocomplete="username" required>
+    
+                <label for="password">Password:</label>
+                <input style="color: orangered; background-color: transparent; font-weight: bolder; font-size: medium; border-color: orangered;" type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+    
+                <label for="confirmpassword">Confirm Password:</label>
+                <input style="color: orangered; background-color: transparent; font-weight: bolder; font-size: medium; border-color: orangered;" type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-enter your password" autocomplete="current-password" required>
+                
+                <button type="submit">Sign Up</button>
+
+                <p>Already have an account? Please <a href="/login" style="color: orangered;">Login</a>.</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
